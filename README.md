@@ -25,6 +25,14 @@ A simple e-commerce shopping cart system built with Laravel and Livewire.
 
 ---
 
+## Requirements identification, Plan & Decisions
+
+- [Requirements Summary](docs/REQUIREMENTS.md)
+- [Development Plan](docs/DEVELOPMENT_PLAN.md)
+- [Architecture Decisions & Assumptions](docs/DECISIONS.md)
+
+---
+
 ## Prerequisites
 
 - PHP 8.2+
@@ -80,7 +88,7 @@ MAIL_HOST=sandbox.smtp.mailtrap.io
 MAIL_PORT=2525
 MAIL_USERNAME=your_mailtrap_username
 MAIL_PASSWORD=your_mailtrap_password
-MAIL_FROM_ADDRESS="noreply@example.com"
+MAIL_FROM_ADDRESS="admin@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
 
 # Shop Configuration
@@ -156,34 +164,14 @@ php artisan report:daily-sales --date=2026-01-19
 
 ---
 
-## Project Structure
-
-```
-app/
-├── Console/Commands/      # Artisan commands
-├── Events/                # Domain events
-├── Jobs/                  # Queued jobs
-├── Listeners/             # Event listeners
-├── Livewire/              # Livewire components
-├── Mail/                  # Mailable classes
-├── Models/                # Eloquent models
-└── Services/              # Business logic services
-    ├── CartService.php
-    ├── CheckoutService.php
-    ├── SalesReportService.php
-    └── StockService.php
-```
-
----
-
 ## Configuration
 
 Application-specific settings in `config/shop.php`:
 
-| Key | Description | Default |
-|-----|-------------|---------|
+| Key | Description | Default             |
+|-----|-------------|---------------------|
 | `dummy_admin_email` | Email for admin notifications | `admin@example.com` |
-| `low_stock_threshold` | Stock level to trigger alerts | `10` |
+| `low_stock_threshold` | Stock level to trigger alerts | `5`                 |
 
 ---
 
@@ -207,14 +195,6 @@ php artisan test
 # Run with coverage
 php artisan test --coverage
 ```
-
----
-
-## Documentation
-
-- [Requirements Summary](docs/REQUIREMENTS.md)
-- [Development Plan](docs/DEVELOPMENT_PLAN.md)
-- [Architecture Decisions & Assumptions](docs/DECISIONS.md)
 
 ---
 
