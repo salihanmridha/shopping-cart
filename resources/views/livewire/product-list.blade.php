@@ -40,23 +40,41 @@
                         @endif
                     </p>
 
-                    <button
-                        wire:click="addToCart({{ $product->id }})"
-                        wire:loading.attr="disabled"
-                        wire:loading.class="opacity-50 cursor-not-allowed"
-                        @disabled($product->stock_quantity === 0)
-                        class="w-full py-2 px-4 rounded-md font-medium transition-colors
-                            {{ $product->stock_quantity > 0
-                                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                : 'bg-gray-300 text-gray-500 cursor-not-allowed' }}"
-                    >
-                        <span wire:loading.remove wire:target="addToCart({{ $product->id }})">
-                            {{ $product->stock_quantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
-                        </span>
-                        <span wire:loading wire:target="addToCart({{ $product->id }})">
-                            Adding...
-                        </span>
-                    </button>
+                    @php $inCart = in_array($product->id, $this->cartProductIds); @endphp
+
+                    @if($inCart)
+                        {{-- Go to Cart Button --}}
+                        <a
+                            href="{{ route('cart') }}"
+                            wire:navigate
+                            class="block w-full py-2 px-4 rounded-md font-medium text-center transition-colors bg-green-600 text-white hover:bg-green-700"
+                        >
+                            ✓ Go to Cart
+                        </a>
+                    @elseif($product->stock_quantity === 0)
+                        {{-- Out of Stock Button --}}
+                        <button
+                            disabled
+                            class="w-full py-2 px-4 rounded-md font-medium bg-gray-300 text-gray-500 cursor-not-allowed"
+                        >
+                            Out of Stock
+                        </button>
+                    @else
+                        {{-- Add to Cart Button --}}
+                        <button
+                            wire:click="addToCart({{ $product->id }})"
+                            wire:loading.attr="disabled"
+                            wire:loading.class="opacity-50 cursor-not-allowed"
+                            class="w-full py-2 px-4 rounded-md font-medium transition-colors bg-blue-600 text-white hover:bg-blue-700"
+                        >
+                            <span wire:loading.remove wire:target="addToCart({{ $product->id }})">
+                                Add to Cart
+                            </span>
+                            <span wire:loading wire:target="addToCart({{ $product->id }})">
+                                Adding...
+                            </span>
+                        </button>
+                    @endif
                 </div>
             </div>
         @empty

@@ -15,6 +15,16 @@ class ProductList extends Component
 {
     use WithPagination;
 
+    #[Computed]
+    public function cartProductIds(): array
+    {
+        if (!Auth::check()) {
+            return [];
+        }
+
+        return Auth::user()->cartItems()->pluck('product_id')->toArray();
+    }
+
     public function addToCart(Product $product, CartService $cartService): void
     {
         if (!Auth::check()) {
@@ -24,7 +34,7 @@ class ProductList extends Component
 
         try {
             $cartService->add(Auth::user(), $product);
-            session()->flash('success', "{$product->name} added to cart!");
+            unset($this->cartProductIds);
             $this->dispatch('cart-updated');
         } catch (\InvalidArgumentException $e) {
             $this->addError('cart', $e->getMessage());
