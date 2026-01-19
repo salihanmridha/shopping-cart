@@ -34,7 +34,7 @@ class ProductList extends Component
     #[Computed]
     public function products(): LengthAwarePaginator
     {
-        return Product::orderBy('name')->paginate(12);
+        return Product::orderBy('created_at', 'desc')->paginate(12);
     }
 
     public function render(): View

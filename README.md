@@ -40,7 +40,7 @@ A simple e-commerce shopping cart system built with Laravel and Livewire.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/shopping-cart.git
+git clone https://github.com/salihanmridha/shopping-cart.git
 cd shopping-cart
 ```
 

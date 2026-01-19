@@ -1,5 +1,12 @@
 # Architecture Decisions & Assumptions
 
+## Stack Decisions
+**Decision:** Use Laravel 12 with Livewire starter kit.
+
+**Why:**
+- My expertise is with Laravel and Livewire is better than React or Vue
+
+
 ## Design Decisions
 
 ### 1. Service Layer Pattern
