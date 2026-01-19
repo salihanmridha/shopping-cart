@@ -29,7 +29,7 @@ class CheckoutService
             throw new \InvalidArgumentException('Cart is empty.');
         }
 
-        return DB::transaction(function () use ($user, $cartItems) {
+        $order = DB::transaction(function () use ($user, $cartItems) {
             // Validate stock for all items before processing
             foreach ($cartItems as $cartItem) {
                 $this->stockService->validateAvailability(
@@ -63,6 +63,8 @@ class CheckoutService
 
             return $order->load('orderItems.product');
         });
+
+        return $order;
     }
 
     /**
