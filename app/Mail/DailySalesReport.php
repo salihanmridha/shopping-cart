@@ -13,6 +13,13 @@ class DailySalesReport extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * @param Carbon $date
+     * @param array $salesData
+     * @param float $totalRevenue
+     * @param int $totalQuantity
+     * @param int $orderCount
+     */
     public function __construct(
         public Carbon $date,
         public array $salesData,

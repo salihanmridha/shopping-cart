@@ -71,6 +71,16 @@ Order Created → OrderCompleted Event → 3 Listeners → 3 Queued Jobs → 3 E
 - Prevents "too many emails per second" errors
 - Production would use proper mail provider without this issue
 
+### 7. Eloquent Collection Processing for Sales Report
+**Decision:** Use Eloquent with collection-level aggregation instead of raw SQL.
+
+**Why:**
+- Cleaner, more readable code
+- Sufficient for expected data volume
+- Easier to maintain and test
+
+**Trade-off:** For large datasets in production, SQL-level aggregation with JOIN and GROUP BY would be more performant.
+
 ---
 
 ## Assumptions

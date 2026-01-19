@@ -13,6 +13,10 @@ class OrderShow extends Component
 {
     public Order $order;
 
+    /**
+     * @param Order $order
+     * @return void
+     */
     public function mount(Order $order): void
     {
         // Ensure the order belongs to the authenticated user
@@ -23,6 +27,9 @@ class OrderShow extends Component
         $this->order = $order->load('orderItems.product');
     }
 
+    /**
+     * @return View
+     */
     public function render(): View
     {
         return view('livewire.order-show')

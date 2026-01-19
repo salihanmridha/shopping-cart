@@ -10,6 +10,9 @@ class OrderCompleted
 {
     use Dispatchable, SerializesModels;
 
+    /**
+     * @param Order $order
+     */
     public function __construct(
         public Order $order
     ) {}

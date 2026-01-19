@@ -11,6 +11,10 @@ class CheckLowStockListener implements ShouldQueue
 {
     public function __construct() {}
 
+    /**
+     * @param OrderCompleted $event
+     * @return void
+     */
     public function handle(OrderCompleted $event): void
     {
         $stockService = app(StockService::class);

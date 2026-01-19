@@ -21,6 +21,12 @@ class Cart extends Component
         unset($this->cartTotal);
     }
 
+    /**
+     * @param CartItem $cartItem
+     * @param int $quantity
+     * @param CartService $cartService
+     * @return void
+     */
     public function updateQuantity(CartItem $cartItem, int $quantity, CartService $cartService): void
     {
         try {
@@ -32,6 +38,11 @@ class Cart extends Component
         }
     }
 
+    /**
+     * @param CartItem $cartItem
+     * @param CartService $cartService
+     * @return void
+     */
     public function removeItem(CartItem $cartItem, CartService $cartService): void
     {
         try {
@@ -43,6 +54,10 @@ class Cart extends Component
         }
     }
 
+    /**
+     * @param CheckoutService $checkoutService
+     * @return void
+     */
     public function checkout(CheckoutService $checkoutService): void
     {
         try {
@@ -67,6 +82,9 @@ class Cart extends Component
         return app(CartService::class)->getCartTotal(Auth::user());
     }
 
+    /**
+     * @return View
+     */
     public function render(): View
     {
         return view('livewire.cart');

@@ -25,6 +25,11 @@ class ProductList extends Component
         return Auth::user()->cartItems()->pluck('product_id')->toArray();
     }
 
+    /**
+     * @param Product $product
+     * @param CartService $cartService
+     * @return void
+     */
     public function addToCart(Product $product, CartService $cartService): void
     {
         if (!Auth::check()) {
@@ -47,6 +52,9 @@ class ProductList extends Component
         return Product::orderBy('created_at', 'desc')->paginate(12);
     }
 
+    /**
+     * @return View
+     */
     public function render(): View
     {
         return view('livewire.product-list');
