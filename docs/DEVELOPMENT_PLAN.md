@@ -17,7 +17,6 @@
 | 11   | Email Notifications                   | ✅ Done |
 | 12   | Daily Sales Report                    | ✅ Done |
 | 13   | Feature Testing                       | ✅ Done |
-| 14   | Documentation & Submission            | ✅ Done |
 
 ---
 

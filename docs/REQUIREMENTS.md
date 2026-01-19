@@ -44,16 +44,3 @@ Build a simple e-commerce shopping cart system using Laravel and Livewire starte
 - Collect products sold that day
 - Send summary report to admin email
 
-## 5. Architecture Requirements
-- SOLID Principles
-- Service Layer for business logic
-- Event-driven flow for notifications
-- Separation of concerns (Livewire components thin)
-
-## 6. Testing Requirements
-- TDD approach
-- Feature tests for workflows
-
-## 7. Documentation Requirements
-- README with setup instructions
-- Queue and scheduler instructions
