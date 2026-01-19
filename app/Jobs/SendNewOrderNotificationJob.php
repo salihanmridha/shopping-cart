@@ -2,26 +2,27 @@
 
 namespace App\Jobs;
 
-use App\Mail\LowStockNotification;
+use App\Mail\NewOrderPlaced;
+use App\Models\Order;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Mail;
 
-class LowStockNotificationJob implements ShouldQueue
+class SendNewOrderNotificationJob implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * @param array $products
-     */
     public function __construct(
-        public array $products
+        public Order $order
     ) {}
 
     public function handle(): void
     {
         $adminEmail = config('shop.dummy_admin_email');
 
-        Mail::to($adminEmail)->send(new LowStockNotification($this->products));
+        // Ensure order items and user are loaded
+        $this->order->load(['orderItems.product', 'user']);
+
+        Mail::to($adminEmail)->send(new NewOrderPlaced($this->order));
     }
 }
