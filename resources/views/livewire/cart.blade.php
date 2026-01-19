@@ -109,14 +109,15 @@
                     </span>
                 </div>
 
-                <a
-                    href="#"
-                    {{-- TODO: href="{{ route('checkout') }}" when Task 10 is complete --}}
-                    wire:navigate
-                    class="block w-full bg-blue-600 text-white text-center py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors"
+                <button
+                    wire:click="checkout"
+                    wire:loading.attr="disabled"
+                    wire:confirm="Proceed with checkout? This will place your order."
+                    class="block w-full bg-blue-600 text-white text-center py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    Proceed to Checkout
-                </a>
+                    <span wire:loading.remove wire:target="checkout">Proceed to Checkout</span>
+                    <span wire:loading wire:target="checkout">Processing...</span>
+                </button>
             </div>
         </div>
     @endif

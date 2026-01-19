@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\CartItem;
 use App\Services\CartService;
+use App\Services\CheckoutService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,18 @@ class Cart extends Component
             $cartService->remove(Auth::user(), $cartItem);
             session()->flash('success', 'Item removed from cart.');
             $this->refreshCart();
+        } catch (\InvalidArgumentException $e) {
+            $this->addError('cart', $e->getMessage());
+        }
+    }
+
+    public function checkout(CheckoutService $checkoutService): void
+    {
+        try {
+            $order = $checkoutService->process(Auth::user());
+
+            session()->flash('success', 'Order placed successfully!');
+            $this->redirect(route('orders.show', $order), navigate: true);
         } catch (\InvalidArgumentException $e) {
             $this->addError('cart', $e->getMessage());
         }
