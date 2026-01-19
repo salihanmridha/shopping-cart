@@ -188,13 +188,61 @@ Application-specific settings in `config/shop.php`:
 
 ## Testing
 
+### Test Suite Overview
+
+**107 feature tests** covering all critical business logic and user flows.
+
+### Test Files
+
+#### Cart Management (`tests/Feature/Cart/`)
+- **AddToCartTest.php** - Product addition, stock validation, quantity limits
+- **UpdateCartTest.php** - Quantity updates, authorization, stock checks
+- **RemoveFromCartTest.php** - Item removal, user isolation
+- **ViewCartTest.php** - Cart viewing, totals calculation, clearing
+
+#### Checkout & Orders (`tests/Feature/Checkout/`)
+- **CheckoutProcessTest.php** - Order creation, cart clearing, atomic transactions, event dispatching
+- **StockReductionTest.php** - Stock updates, multi-user scenarios, rollback on failure
+
+#### Stock Management (`tests/Feature/Stock/`)
+- **StockValidationTest.php** - Availability checks, low stock detection, threshold configuration
+
+#### Security (`tests/Feature/Security/`)
+- **CartIsolationTest.php** - Multi-user cart isolation, order ownership, authorization
+
+#### Events & Notifications (`tests/Feature/Events/`)
+- **OrderCompletedEventTest.php** - Event dispatching, email notifications (customer & admin)
+
+#### Livewire Components (`tests/Feature/Product/`)
+- **ProductBrowsingTest.php** - Product listing, pagination, add-to-cart, authentication
+
+### Key Test Scenarios
+
+- ✅ Stock validation (cannot exceed available quantity)
+- ✅ User isolation (users cannot access other users' carts)
+- ✅ Atomic checkout (rollback on failure)
+- ✅ Price capture at checkout time
+- ✅ Low stock notifications
+- ✅ Email notifications (order confirmation, admin alerts)
+- ✅ Livewire component interactions
+- ...and many more edge cases
+
+### Running Tests
+
 ```bash
 # Run all tests
 php artisan test
 
-# Run with coverage
-php artisan test --coverage
+# Run specific test file
+php artisan test --filter=AddToCartTest
+
 ```
+
+### Test Configuration
+
+Tests use **SQLite in-memory database** for fast, isolated execution (~3.7s for full suite).
+
+Configuration: `phpunit.xml`
 
 ---
 
