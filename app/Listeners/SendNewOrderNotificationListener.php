@@ -17,6 +17,6 @@ class SendNewOrderNotificationListener implements ShouldQueue
     public function handle(OrderCompleted $event): void
     {
         // Delay by 3 seconds to avoid email rate limiting by mailtrap
-        SendNewOrderNotificationJob::dispatch($event->order)->delay(now()->addSeconds(3));
+        SendNewOrderNotificationJob::dispatch($event->order)->delay(now()->addSeconds(12));
     }
 }
